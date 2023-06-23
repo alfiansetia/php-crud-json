@@ -137,8 +137,8 @@ $api = new Api();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['action']) && $_POST['action'] == 'store') {
         if (isset($_POST['name']) && isset($_POST['ip'])) {
-            $data['name'] = $_POST['name'];
-            $data['ip'] = $_POST['ip'];
+            $data['name'] = htmlspecialchars($_POST['name']);
+            $data['ip'] = htmlspecialchars($_POST['ip']);
             $data['last_active'] = null;
             $data['id'] = uniqid();
             $api->store($data);
@@ -150,8 +150,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (isset($_POST['action']) && $_POST['action'] == 'update') {
         if (isset($_POST['id'])) {
             $id = $_POST['id'];
-            $data['name'] = $_POST['name'];
-            $data['ip'] = $_POST['ip'];
+            $data['name'] = htmlspecialchars($_POST['name']);
+            $data['ip'] = htmlspecialchars($_POST['ip']);
             $api->update($id, $data);
         } else {
             header('Content-Type: application/json');
